@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Love Calculator Result</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('bg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .result-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h2 {
+            color: lime;
+            margin: 10px 0;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            background-color: lime;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .button:hover {
+            background-color: green;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-container" id="result-container">
+        <h2 id="names"></h2>
+        <p id="loveScore"></p>
+        <p id="quote"></p>
+        <div class="button-container">
+            <button class="button" onclick="retry()">Retry</button>
+            <button class="button" onclick="sharePage()">Share</button>
+        </div>
+    </div>
+
+    <script>
+        // Function to get URL parameters
+        function getParameterByName(name) {
+            const url = new URL(window.location.href);
+            return url.searchParams.get(name);
+        }
+
+        // Display results
+        document.getElementById("names").innerText = `${getParameterByName("name1")} ❤️ ${getParameterByName("name2")}`;
+        document.getElementById("loveScore").innerText = `Love Score: ${getParameterByName("loveScore")}%`;
+        document.getElementById("quote").innerText = `"${getParameterByName("quote")}"`;
+
+        // Retry function to go back to the main calculator page
+        function retry() {
+            window.location.href = "index.html"; // Path to your main Love Calculator page
+        }
+
+        // Share the main Love Calculator page link
+        function sharePage() {
+            const mainUrl = "https://lovecalculator5.onrender.com/"; // Replace with your main Love Calculator page URL
+
+            if (navigator.share) {
+                navigator.share({
+                    title: "Try the Love Calculator!",
+                    text: "Check out this fun Love Calculator!",
+                    url: mainUrl
+                }).then(() => console.log("Thanks for sharing!"))
+                  .catch(console.error);
+            } else {
+                alert("Sharing is not supported in this browser. Please copy the link manually.");
+            }
+        }
+    </script>
+</body>
+</html>
